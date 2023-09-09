@@ -6,6 +6,7 @@ type RequestData = {
   quantity: number;
   expiration: string;
   location: string;
+  purchased: string;
 };
 
 type ResponseData =
@@ -21,8 +22,13 @@ export default async function handler(
   res: NextApiResponse<ResponseData>
 ) {
   try {
-    const { ingredient, quantity, expiration, location }: RequestData =
-      req.body;
+    const {
+      ingredient,
+      quantity,
+      expiration,
+      location,
+      purchased,
+    }: RequestData = req.body;
 
     const client = new Client({
       database: "Refrigerator",
@@ -34,10 +40,16 @@ export default async function handler(
     await client.connect();
 
     const inventory = await client.query(
-      `INSERT INTO public."Inventory" (ingredient_id, quantity, expiration_date, location)
-       VALUES ($1, $2, $3, $4)
+      `INSERT INTO public."Inventory" (ingredient_id, quantity, expiration_date, location, date_purchased)
+       VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [ingredient, quantity, new Date(expiration), location]
+      [
+        ingredient,
+        quantity,
+        new Date(expiration),
+        location,
+        new Date(purchased),
+      ]
     );
 
     //update inventory where id is the previous ID to set the expiration date
