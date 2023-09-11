@@ -3,7 +3,6 @@ import { useEffect, useState, ChangeEvent } from "react";
 import { Ingredient } from "./components/Ingredient";
 import { Inventory } from "./components/Inventory";
 import { Recipes } from "./components/Recipes";
-import Head from "next/head";
 
 import styles from "./page.module.css";
 
@@ -169,27 +168,23 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div>
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://use.typekit.net/vbh5hkq.css"
-          ></link>
-        </Head>
-      </div>
+      <div></div>
       <div id="main-page">
-        <h1>MealFridge</h1>
-        <h3> Your Refrigerator and Meal Plan Tracker</h3>
-        <h3>Add Recipes</h3>
-        <h3>Create a montly meal plan</h3>
-        <h3>See what you have / are missing for each recipe</h3>
-        <h3>Track what is in your refrigerator/pantry/sock drawer</h3>
-        <h3>
-          See what ingredients have expired / how many days have passed since
-          purchase date
-        </h3>
+        <h1 className="title">MealFridge</h1>
+        <p> Your Refrigerator and Meal Plan Tracker</p>
+        <div id="info-div">
+          <p>Add Recipes</p>
+          <p>Create a monthly meal plan</p>
+          <p>See what you have / are missing for each recipe</p>
+          <p>Track what is in your refrigerator/pantry/sock drawer</p>
+          <p>
+            See what ingredients have expired / how many days have passed since
+            purchase date
+          </p>
+        </div>
       </div>
       <div id="ingredients-div">
+        <h1>Ingredients</h1>
         <div id="quantity">
           Quantity
           <input value={quantity} onChange={handleQuantityChange} />
@@ -202,10 +197,17 @@ export default function Home() {
         <br></br>
         <div>
           {/* {data.ingredients.map((row: any) => (
-            <Ingredient row={row} key={row[0]?.toString()} />
-          ))} */}
+      <Ingredient row={row} key={row[0]?.toString()} />
+    ))} */}
         </div>
       </div>
+      <div id="recipe-div">
+        <h1>Recipes</h1>
+        <input value={recipe} onChange={handleRecipeChange} />
+        <button onClick={addRecipe}>Add Recipe</button>
+      </div>
+      <div></div>
+
       <div id="inventory-div">
         <h1>Inventory</h1>
         <div id="inventory-div-2">
@@ -246,26 +248,34 @@ export default function Home() {
       </div>
       <div>
         {/* {data.inventory.map((row: any) => (
-          <Inventory
-            ingredients={data.ingredients}
-            row={row}
-            key={row[0]?.toString()}
-          />
-        ))} */}
-      </div>
-      <div id="recipe-div">
-        <input value={recipe} onChange={handleRecipeChange} />
-        <button onClick={addRecipe}>Add Recipe</button>
+      <Inventory
+        ingredients={data.ingredients}
+        row={row}
+        key={row[0]?.toString()}
+      />
+    ))} */}
+
+        <div id="inventory-track-div">
+          <h1>Inventory Tracker</h1>
+          <div>{JSON.stringify(data.inventory)}</div>
+        </div>
+        <div id="do-i-have-div">
+          <h1>Do I have enough?</h1>
+        </div>
+        {/* {data.inventory.map((row: any) => (
+      <Recipes row={row} key={row[0]?.toString()} />
+    ))} */}
       </div>
       <div>
-        {/* {data.inventory.map((row: any) => (
-          <Recipes row={row} key={row[0]?.toString()} />
-        ))} */}
+        <h1>Shopping List</h1>
       </div>
-      <div>{JSON.stringify(data.ingredients)}</div>
+      <div>
+        <h1>Meal Planner</h1>
+      </div>
+      {/* <div>{JSON.stringify(data.ingredients)}</div>
       <div>{JSON.stringify(data.inventory)}</div>
       <div>{JSON.stringify(data.recipeIngredients)}</div>
-      <div>{JSON.stringify(data.recipes)}</div>
+      <div>{JSON.stringify(data.recipes)}</div> */}
     </main>
   );
 }
