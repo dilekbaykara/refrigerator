@@ -38,7 +38,7 @@ export default async function handler(
     });
 
     await client.connect();
-
+    console.log(purchased);
     const inventory = await client.query(
       `INSERT INTO public."Inventory" (ingredient_id, quantity, expiration_date, location, date_purchased)
        VALUES ($1, $2, $3, $4, $5)

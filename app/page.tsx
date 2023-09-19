@@ -55,7 +55,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/hello");
+      const response = await fetch("/api/app-data");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -101,14 +101,6 @@ export default function Home() {
   function addInventory() {
     console.log("inventory", inventory);
     const fetchData = async () => {
-      console.log(
-        JSON.stringify({
-          ingredient: inventoryIngredient,
-          quantity: quantity,
-          expiration: expiration,
-          location: inventoryLocation,
-        })
-      );
       const response = await fetch("/api/create-inventory", {
         method: "POST",
         headers: {
@@ -118,6 +110,7 @@ export default function Home() {
           ingredient: inventoryIngredient,
           quantity: quantity,
           expiration: expiration,
+          purchased: purchaseDate,
           location: inventoryLocation,
         }), // Convert inventory to JSON
       });
@@ -130,6 +123,35 @@ export default function Home() {
       setData({
         ...data,
         inventory: [...data.inventory, result.inventory],
+      });
+    };
+    fetchData();
+  }
+
+  function deleteInventory(id: number) {
+    const fetchData = async () => {
+      const response = await fetch("/api/delete-inventory", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      // setData({
+      //   ...data,
+      //   inventory: [...data.inventory, result.inventory],
+      // });
+
+      console.log(id, result);
+      setData({
+        ...data,
+        inventory: data.inventory.filter((row: any[]) => row[0] !== id),
       });
     };
     fetchData();
@@ -257,6 +279,17 @@ export default function Home() {
 
         <div id="inventory-track-div">
           <h1>Inventory Tracker</h1>
+          {data.inventory.map((row: any) => (
+            <Inventory
+              ingredients={data.ingredients}
+              row={row}
+              key={row[0]?.toString()}
+              delete={() => {
+                console.log("delete", row[0]);
+                deleteInventory(row[0]);
+              }}
+            />
+          ))}
           <div>{JSON.stringify(data.inventory)}</div>
         </div>
         <div id="do-i-have-div">
