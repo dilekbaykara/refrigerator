@@ -3,8 +3,26 @@ import { useEffect, useState, ChangeEvent } from "react";
 import { Ingredient } from "./components/Ingredient";
 import { Inventory } from "./components/Inventory";
 import { Recipes } from "./components/Recipes";
-
+import { Anek_Malayalam, Anybody, Unbounded } from "next/font/google";
 import styles from "./page.module.css";
+
+const anek = Anek_Malayalam({
+  variable: "--font-anek",
+  weight: "600",
+  subsets: ["latin"],
+});
+
+const anybody = Anybody({
+  variable: "--font-any",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const unbounded = Unbounded({
+  variable: "--font-un",
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -191,17 +209,26 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div></div>
-      <div id="main-page">
-        <h1 className="title">MealFridge</h1>
-        <p> Your Refrigerator and Meal Plan Tracker</p>
+      <div id="main-page" className={unbounded.variable}>
+        <div id="main" className={unbounded.variable}>
+          MealFridge
+        </div>
+        <p id="title-info" className={anybody.variable}>
+          {" "}
+          Your Refrigerator and Meal Plan Tracker
+        </p>
         <div id="info-div">
-          <p>Add Recipes</p>
-          <p>Create a monthly meal plan</p>
-          <p>See what you have / are missing for each recipe</p>
-          <p>Track what is in your refrigerator/pantry/sock drawer</p>
-          <p>
-            See what ingredients have expired / how many days have passed since
-            purchase date
+          <p className="info-lines">~ Add Recipes</p>
+          <p className="info-lines">~ Create a monthly meal plan</p>
+          <p className="info-lines">
+            ~ See what you have / are missing for each recipe
+          </p>
+          <p className="info-lines">
+            ~ Track what is in your refrigerator/pantry/sock drawer
+          </p>
+          <p className="info-lines">
+            ~ See what ingredients have expired / how many days have passed
+            since purchase date
           </p>
         </div>
       </div>
