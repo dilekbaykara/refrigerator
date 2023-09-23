@@ -318,7 +318,7 @@ export default function Home() {
               }}
             />
           ))}
-          <div>{JSON.stringify(data.inventory)}</div>
+          <div id="data-inventory">{JSON.stringify(data.inventory)}</div>
         </div>
         <div id="do-i-have-div">
           <h1 className="title-div">Do I have enough?</h1>
