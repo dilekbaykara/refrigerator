@@ -233,7 +233,8 @@ export default function Home() {
         </div>
       </div>
       <div id="ingredients-div">
-        <h1>Ingredients</h1>
+        <h1 className="title-div">Ingredients</h1>
+
         <div id="quantity">
           Quantity
           <input value={quantity} onChange={handleQuantityChange} />
@@ -251,49 +252,49 @@ export default function Home() {
         </div>
       </div>
       <div id="recipe-div">
-        <h1>Recipes</h1>
+        <h1 className="title-div">Recipes</h1>
         <input value={recipe} onChange={handleRecipeChange} />
         <button onClick={addRecipe}>Add Recipe</button>
       </div>
       <div></div>
 
       <div id="inventory-div">
-        <h1>Inventory</h1>
-        <div id="inventory-div-2">
+        <h1 className="title-div">Inventory</h1>
+        <div className="inventory-form">
           Add Inventory
           <input value={inventory} onChange={handleInventoryChange} />
           From Location
           <input value={inventoryLocation} onChange={handleLocationChange} />
+          <div id="quantity">
+            Quantity
+            <input value={quantity} onChange={handleQuantityChange} />
+          </div>
+          Choose Inventory
+          <select
+            value={inventoryIngredient}
+            onChange={handleInventoryIngredientChange}
+          >
+            <option value="">--Please choose an option--</option>
+            {data.ingredients.map((row: any) => (
+              <option value={row[0]} key={row[0]?.toString()}>
+                {row[1]}
+              </option>
+            ))}
+          </select>
+          Expiration Date
+          <input
+            type="date"
+            value={expiration}
+            onChange={handleExpirationChange}
+          />
+          Date Purchased
+          <input
+            type="date"
+            value={purchaseDate}
+            onChange={handlePurchaseChange}
+          />
+          <button onClick={addInventory}>Add Inventory</button>
         </div>
-        <div id="quantity">
-          Quantity
-          <input value={quantity} onChange={handleQuantityChange} />
-        </div>
-        Choose Inventory
-        <select
-          value={inventoryIngredient}
-          onChange={handleInventoryIngredientChange}
-        >
-          <option value="">--Please choose an option--</option>
-          {data.ingredients.map((row: any) => (
-            <option value={row[0]} key={row[0]?.toString()}>
-              {row[1]}
-            </option>
-          ))}
-        </select>
-        Expiration Date
-        <input
-          type="date"
-          value={expiration}
-          onChange={handleExpirationChange}
-        />
-        Date Purchased
-        <input
-          type="date"
-          value={purchaseDate}
-          onChange={handlePurchaseChange}
-        />
-        <button onClick={addInventory}>Add Inventory</button>
       </div>
       <div>
         {/* {data.inventory.map((row: any) => (
@@ -305,7 +306,7 @@ export default function Home() {
     ))} */}
 
         <div id="inventory-track-div">
-          <h1>Inventory Tracker</h1>
+          <h1 className="title-div">Inventory Tracker</h1>
           {data.inventory.map((row: any) => (
             <Inventory
               ingredients={data.ingredients}
@@ -320,17 +321,17 @@ export default function Home() {
           <div>{JSON.stringify(data.inventory)}</div>
         </div>
         <div id="do-i-have-div">
-          <h1>Do I have enough?</h1>
+          <h1 className="title-div">Do I have enough?</h1>
         </div>
         {/* {data.inventory.map((row: any) => (
       <Recipes row={row} key={row[0]?.toString()} />
     ))} */}
       </div>
       <div>
-        <h1>Shopping List</h1>
+        <h1 className="title-div">Shopping List</h1>
       </div>
       <div>
-        <h1>Meal Planner</h1>
+        <h1 className="title-div">Meal Planner</h1>
       </div>
       {/* <div>{JSON.stringify(data.ingredients)}</div>
       <div>{JSON.stringify(data.inventory)}</div>
