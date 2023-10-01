@@ -253,7 +253,7 @@ export default function Home() {
       </div>
       <div id="recipe-div">
         <h1 className="title-div">Recipes</h1>
-        <input value={recipe} onChange={handleRecipeChange} />
+        <input id="recipe-input" value={recipe} onChange={handleRecipeChange} />
         <button onClick={addRecipe}>Add Recipe</button>
       </div>
       <div></div>
